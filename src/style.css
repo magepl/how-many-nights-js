@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+@theme {
+  --color-magegreen: #267e5c;
+  --color-other: #b0d9c8;
+}
