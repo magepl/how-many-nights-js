@@ -76,7 +76,6 @@ document.getElementById("reset-btn")?.addEventListener("click", resetTimes);
 function resetTimes() {
   timesArr = [];
   renderTimes();
-  console.log("reset all times clicked");
 }
 
 // Delete button
