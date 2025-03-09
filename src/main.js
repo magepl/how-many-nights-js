@@ -87,5 +87,4 @@ timeFeed.addEventListener("click", function (e) {
     timesArr.splice(index, 1);
     renderTimes();
   }
-  console.log("delete time clicked");
 });
