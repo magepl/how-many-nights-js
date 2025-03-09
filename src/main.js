@@ -57,7 +57,12 @@ function renderTimes() {
       <p class="text-center">End date: ${formatDate(timesArr[i].endTime)}</p>
       <p class="text-center">Total nights: ${timesArr[i].totalNights}</p>
       <div class="flex justify-center items-center">
-      
+<button class="delete-btn cursor-pointer" data-index="${i}">
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+</svg>
+</button>
+
       </div>
       </div>
       `;
@@ -75,14 +80,12 @@ function resetTimes() {
 }
 
 // Delete button
-document.getElementById("delete-btn")?.addEventListener("click", deleteTime);
-function deleteTime() {
+timeFeed.addEventListener("click", function (e) {
+  const deleteBtn = e.target.closest(".delete-btn");
+  if (deleteBtn) {
+    const index = parseInt(deleteBtn.dataset.index);
+    timesArr.splice(index, 1);
+    renderTimes();
+  }
   console.log("delete time clicked");
-}
-
-// for delete icon
-// <button id="delete-btn" class="cursor-pointer">
-/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-</svg>
-</button> */
+});
