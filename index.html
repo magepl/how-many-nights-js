@@ -10,14 +10,13 @@
   <body class="text-magegreen h-screen">
     <main class="py-3">
       <header class="mx-5">
-
         <h1 class="text-5xl pb-2">How many nights?</h1>
         <p>Built because I found it difficult calculating<br> how many nights my son spent with me, <br>I hope you can find this useful</p>
       </header>
       <div class="py-4 flex">
         <form id="dateForm" class="mx-5">
           <div>
-            <div class="items-center grid grid-cols-4 gap-2">
+            <div class="items-center md:grid md:grid-cols-4 md:gap-2">
               <label class="" for="start-date">Start date: </label>
               <input class="border-1 rounded p-1" type="date" name="startDate" id="start-date-el" required/>
               <label class="" for="end-date">End date: </label>
@@ -32,7 +31,7 @@
       </div>
       <h3 class="px-2 text-right" id="total-el"></h3>
       <div id="time-feed" class=""></div>
-      <div id="overall-nights" class="mx-5 text-right"><p>Total nights overall: </p></div>
+      <div id="overall-nights" class="mx-7 text-right"><p>Total nights overall: </p></div>
     </main>
     <script type="module" src="/src/main.js"></script>
   </body>
