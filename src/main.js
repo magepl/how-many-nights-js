@@ -4,6 +4,7 @@ const form = document.getElementById("dateForm");
 const timeFeed = document.getElementById("time-feed");
 const startDate = document.getElementById("start-date-el").value;
 const endDate = document.getElementById("end-date-el").value;
+const overallNightsEl = document.getElementById("overall-nights");
 
 function calculateNights(startDate, endDate) {
   const start = new Date(startDate);
@@ -12,6 +13,8 @@ function calculateNights(startDate, endDate) {
   const daysDifference = timeDifference / (1000 * 3600 * 24);
   return Math.abs(Math.round(daysDifference));
 }
+
+let runningTotalNights = 0;
 
 function formatDate(dateString) {
   const date = new Date(dateString);
@@ -27,13 +30,17 @@ function formatDate(dateString) {
 form?.addEventListener("submit", function (e) {
   e.preventDefault();
   const formData = new FormData(form);
+  const nightsForThisDate = calculateNights(
+    formData.get("startDate"),
+    formData.get("endDate")
+  );
+  runningTotalNights += nightsForThisDate;
+
   const newTime = {
     startTime: formData.get("startDate"),
     endTime: formData.get("endDate"),
-    totalNights: calculateNights(
-      formData.get("startDate"),
-      formData.get("endDate")
-    ),
+    totalNights: nightsForThisDate,
+    runningTotalNights: runningTotalNights,
   };
   timesArr.push(newTime);
   form.reset();
@@ -57,16 +64,16 @@ function renderTimes() {
       <p class="text-center">End date: ${formatDate(timesArr[i].endTime)}</p>
       <p class="text-center">Total nights: ${timesArr[i].totalNights}</p>
       <div class="flex justify-center items-center">
-<button class="delete-btn cursor-pointer" data-index="${i}">
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-</svg>
-</button>
-
+      <button class="delete-btn cursor-pointer" data-index="${i}">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+      </svg>
+      </button>
       </div>
       </div>
       `;
     }
+    overallNightsEl.innerHTML = `Total overall nights: ${runningTotalNights}`;
   }
   timeFeed.innerHTML = timesData;
 }
